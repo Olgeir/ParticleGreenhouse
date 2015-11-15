@@ -1,4 +1,4 @@
-#include "ParticleController.h"
+#include "ParticleGreenhouse.h"
 #include "math.h"
 
 // First, define the pins we are going to use.
@@ -14,7 +14,7 @@ uint8_t MOTOR = A6;		// Control signal for external motor.
 uint8_t RELAY = A5;		// Control signal for relay.
 uint8_t SERVO = A4;		// Control signal for servo.
 
-ParticleController::ParticleController(){
+ParticleGreenhouse::ParticleGreenhouse(){
 	pinMode(STATUS_LED, OUTPUT);
 	pinMode(BUTTON, OUTPUT);
 	pinMode(BLUE_LED, OUTPUT);
@@ -29,19 +29,19 @@ ParticleController::ParticleController(){
 
 }
 
-ParticleController::ParticleController(){
+ParticleGreenhouse::ParticleGreenhouse(){
 	// Nothing to destruct
 }
 
-void ParticleController::on(){
+void ParticleGreenhouse::on(){
 	digitalWrite(STATUS_LED, HIGH);
 }
 
-void ParticleController::off(){
+void ParticleGreenhouse::off(){
 	digitalWrite(STATUS_LED, LOW);
 }
 
-void ParticleController::blinkLed(int time){
+void ParticleGreenhouse::blinkLed(int time){
 	on();
 	delay(time/2);
 	off();
