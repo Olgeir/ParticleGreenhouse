@@ -29,7 +29,7 @@ ParticleGreenhouse::ParticleGreenhouse(){
 
 }
 
-ParticleGreenhouse::ParticleGreenhouse(){
+ParticleGreenhouse::~ParticleGreenhouse(){
 	// Nothing to destruct
 }
 
