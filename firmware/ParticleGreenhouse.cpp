@@ -20,7 +20,6 @@ ParticleGreenhouse::ParticleGreenhouse(){
 	pinMode(BLUE_LED, OUTPUT);
 	pinMode(MOTOR, OUTPUT);
 	pinMode(RELAY, OUTPUT);
-	pinMode(SERVO, OUTPUT);
 	pinMode(D_MOIST, INPUT);
 	pinMode(A_MOIST, INPUT);
 	pinMode(POTENTION, INPUT);
