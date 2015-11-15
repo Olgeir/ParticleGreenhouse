@@ -1,8 +1,12 @@
-#include <ParticleController.h>
+#include <ParticleGreenhouse.h>
+
+
+ParticleGreenhouse control;
+
 void setup() {
 
 }
 
 void loop() {
-BlinkLed(2000);
+ control.blinkLed(2000);
 }

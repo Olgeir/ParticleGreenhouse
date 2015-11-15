@@ -6,13 +6,13 @@ uint8_t STATUS_LED = 5;
 uint8_t BUTTON = 3;
 uint8_t BLUE_LED = 7; 	// This one is the little blue LED on your board. On the Photon it is next to D7, and on the Core it is next to the USB jack.
 uint8_t D_MOIST = 2;  	// Digital input from moisture sensor.
-uint8_t A_MOIST = A2;  	// Analog input from moisture sensor.
-uint8_t POTENTION = A1; 	// Analog potentionmeter.
-uint8_t EXT_TEMP = A0; 	// External temperature measurements.
-uint8_t ON_TEMP = 4;	// Onboard temperature measurements.
-uint8_t MOTOR = A6;		// Control signal for external motor.
-uint8_t RELAY = A5;		// Control signal for relay.
-uint8_t SERVO = A4;		// Control signal for servo.
+uint8_t A_MOIST = 2;  	// Analog input from moisture sensor.	(A2)
+uint8_t POTENTION = 1; 	// Analog potentionmeter.				(A1)
+uint8_t EXT_TEMP = 0; 	// External temperature measurements. 	(A0)
+uint8_t ON_TEMP = 4;	// Onboard temperature measurements.	
+uint8_t MOTOR = 6;		// Control signal for external motor.	(A6)
+uint8_t RELAY = 5;		// Control signal for relay.			(A5)
+
 
 ParticleGreenhouse::ParticleGreenhouse(){
 	pinMode(STATUS_LED, OUTPUT);
@@ -33,26 +33,70 @@ ParticleGreenhouse::~ParticleGreenhouse(){
 	// Nothing to destruct
 }
 
-void ParticleGreenhouse::on(){
-	digitalWrite(STATUS_LED, HIGH);
+void ParticleGreenhouse::on(bool ledType){
+	if (ledType == TRUE)
+	{
+		digitalWrite(STATUS_LED, HIGH);
+	}
+	if (ledType == FALSE)
+	{
+		digitalWrite(BLUE_LED, HIGH);
+	}
+	
 }
 
-void ParticleGreenhouse::off(){
-	digitalWrite(STATUS_LED, LOW);
+void ParticleGreenhouse::off(bool ledType){
+	if (ledType == TRUE)
+	{
+		digitalWrite(STATUS_LED, LOW);
+	}
+	if (ledType == FALSE)
+	{
+		digitalWrite(BLUE_LED, LOW);
+	}
 }
 
-void ParticleGreenhouse::blinkLed(int time){
-	on();
-	delay(time/2);
-	off();
-	delay(time/2);
+void ParticleGreenhouse::blinkLed(int time, int rep){
+	for (int i = 0; i < rep; ++i)
+	{
+		on(TRUE);
+		delay(time/2);
+		off(TRUE);
+		delay(time/2);
+	}
+
 }
 
+double ParticleGreenhouse::getAnalogMoisture(){
+	double A_moisture = analogRead(A_MOIST);
+	return A_moisture;
+}
 
+int ParticleGreenhouse::getDigitalMoisture(){
+	int D_moisture = digitalRead(D_MOIST);
+	return D_moisture;
+}
 
+int ParticleGreenhouse::getPotMeter(){
+	int potMeter = analogRead(POTENTION);
+	return potMeter;
+}
 
+void ParticleGreenhouse::blinkBlueLed(int time, int rep){
+	for (int i = 0; i < rep; ++i)
+	{
+		on(FALSE);
+		delay(time/2);
+		off(FALSE);
+		delay(time/2);
+	}
 
+}
 
+bool ParticleGreenhouse::buttonCheck(){
+	bool state = digitalRead(BUTTON);
+	return state;
+}
 
 
 

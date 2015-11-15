@@ -7,9 +7,14 @@ class ParticleGreenhouse
 public:
 	ParticleGreenhouse();
 	~ParticleGreenhouse();
-	void on();
-	void off();
-	void blinkLed(int time);
+	void on(bool ledType);
+	void off(bool ledType);
+	void blinkLed(int time, int rep);
+	double getAnalogMoisture();
+	int getDigitalMoisture();
+	int getPotMeter();
+	void blinkBlueLed(int time, int rep);
+	bool buttonCheck();
 	
 };
 
