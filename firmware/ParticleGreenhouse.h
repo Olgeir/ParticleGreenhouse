@@ -7,6 +7,7 @@ class ParticleGreenhouse
 public:
 	ParticleGreenhouse();
 	~ParticleGreenhouse();
+	void begin(void);
 	void on(bool ledType);
 	void off(bool ledType);
 	void blinkLed(int time, int rep);
@@ -15,6 +16,8 @@ public:
 	int getPotMeter();
 	void blinkBlueLed(int time, int rep);
 	bool buttonCheck();
+	void usePump(int time, int power);
+	void useRelay(int time);
 	
 };
 

@@ -8,24 +8,22 @@ uint8_t BLUE_LED = 7; 	// This one is the little blue LED on your board. On the 
 uint8_t D_MOIST = 2;  	// Digital input from moisture sensor.
 uint8_t A_MOIST = 2;  	// Analog input from moisture sensor.	(A2)
 uint8_t POTENTION = 1; 	// Analog potentionmeter.				(A1)
-uint8_t EXT_TEMP = 0; 	// External temperature measurements. 	(A0)
-uint8_t ON_TEMP = 4;	// Onboard temperature measurements.	
-uint8_t MOTOR = 6;		// Control signal for external motor.	(A6)
+uint8_t PUMP = 6;		// Control signal for external motor.	(A6)
 uint8_t RELAY = 5;		// Control signal for relay.			(A5)
 
 
 ParticleGreenhouse::ParticleGreenhouse(){
+
+}
+void ParticleGreenhouse::begin(){
 	pinMode(STATUS_LED, OUTPUT);
-	pinMode(BUTTON, OUTPUT);
+	pinMode(BUTTON, INPUT);
 	pinMode(BLUE_LED, OUTPUT);
-	pinMode(MOTOR, OUTPUT);
+	pinMode(PUMP, OUTPUT);
 	pinMode(RELAY, OUTPUT);
 	pinMode(D_MOIST, INPUT);
 	pinMode(A_MOIST, INPUT);
-	pinMode(POTENTION, INPUT);
-	pinMode(EXT_TEMP, INPUT);
-	pinMode(ON_TEMP, INPUT);
-
+	pinMode(POTENTION, INPUT);	
 }
 
 ParticleGreenhouse::~ParticleGreenhouse(){
@@ -89,7 +87,6 @@ void ParticleGreenhouse::blinkBlueLed(int time, int rep){
 		off(FALSE);
 		delay(time/2);
 	}
-
 }
 
 bool ParticleGreenhouse::buttonCheck(){
@@ -97,7 +94,16 @@ bool ParticleGreenhouse::buttonCheck(){
 	return state;
 }
 
-
+void ParticleGreenhouse::usePump(int time, int duty){
+	analogWrite(PUMP,duty);
+	delay(time);
+	analogWrite(PUMP,0);
+}
+void ParticleGreenhouse::useRelay(int time){
+	digitalWrite(RELAY,HIGH);
+	delay(time);
+	digitalWrite(RELAY,LOW);
+}
 
 
 
