@@ -8,8 +8,9 @@ uint8_t BLUE_LED = 7; 	// This one is the little blue LED on your board. On the 
 uint8_t D_MOIST = 2;  	// Digital input from moisture sensor.
 uint8_t A_MOIST = 2;  	// Analog input from moisture sensor.	(A2)
 uint8_t POTENTION = 1; 	// Analog potentionmeter.				(A1)
-uint8_t PUMP = 6;		// Control signal for external motor.	(A6)
-uint8_t RELAY = 5;		// Control signal for relay.			(A5)
+uint8_t PUMP = A6;		// Control signal for external motor.	(A6)
+uint8_t RELAY = A5;		// Control signal for relay.			(A5)
+bool flag = TRUE;
 
 
 ParticleGreenhouse::ParticleGreenhouse(){
@@ -69,7 +70,7 @@ double ParticleGreenhouse::getAnalogMoisture(){
 	return A_moisture;
 }
 
-int ParticleGreenhouse::getDigitalMoisture(){
+int ParticleGreenhouse::getDigitalMoisture(){ //Change this to bool
 	int D_moisture = digitalRead(D_MOIST);
 	return D_moisture;
 }
@@ -96,13 +97,19 @@ bool ParticleGreenhouse::buttonCheck(){
 
 void ParticleGreenhouse::usePump(int time, int duty){
 	analogWrite(PUMP,duty);
-	delay(time);
+	delay(time*1000);
 	analogWrite(PUMP,0);
 }
-void ParticleGreenhouse::useRelay(int time){
-	digitalWrite(RELAY,HIGH);
-	delay(time);
-	digitalWrite(RELAY,LOW);
+void ParticleGreenhouse::useRelay(float temp, int low, int high){ 
+	if (temp < low && flag == TRUE ){
+		digitalWrite(RELAY,HIGH);
+		flag = FALSE;
+	}
+	if (temp > high && flag == FALSE ){
+		digitalWrite(RELAY,LOW);
+		flag = TRUE;	
+	}
+
 }
 
 
