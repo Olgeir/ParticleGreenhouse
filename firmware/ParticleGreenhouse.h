@@ -16,7 +16,7 @@ public:
 	int getPotMeter();
 	void blinkBlueLed(int time, int rep);
 	bool buttonCheck();
-	void usePump(int time, int duty));
+	void usePump(int time, int duty);
 	void useRelay(float temp, int low, int high);
 	
 };

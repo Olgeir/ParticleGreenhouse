@@ -1,6 +1,6 @@
 {
     "name": "ParticleGreenhouse",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "author": "Olgeir Gunnsteinsson <olgeir2@gmail.com>",
     "license": "LGPL",
     "description": "Controller for a small ParticleGreenhouse"
